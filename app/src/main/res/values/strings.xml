@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">What a Plane</string>
+
+    <string name="pertanyaan_inisial">Hello</string>
+    <string name="tombol_iya">Iya</string>
+    <string name="tombol_tidak">Tidak</string>
+</resources>
