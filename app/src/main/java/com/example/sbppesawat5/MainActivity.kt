@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var planes: MutableList<Plane>
     private lateinit var characteristics: MutableList<Characteristic>
+    private val matchedCharacteristic = mutableListOf<Characteristic>()
+    private val notMatchedCharacteristic = mutableListOf<Characteristic>()
     private var characteristicPointer = 0
     private var analyzing = false
 
@@ -23,11 +25,13 @@ class MainActivity : AppCompatActivity() {
 
         b_iya.setOnClickListener {
             this.characteristics[this.characteristicPointer].answer = true
+            matchedCharacteristic.add(this.characteristics[this.characteristicPointer])
             changeQuestion()
         }
 
         b_tidak.setOnClickListener {
             this.characteristics[this.characteristicPointer].answer = false
+            notMatchedCharacteristic.add(this.characteristics[this.characteristicPointer])
             analyzeAnswer()
             changeQuestion()
         }
@@ -258,10 +262,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun answerIsFalse(i:Int): Boolean {
+        if (this.notMatchedCharacteristic.contains(this.characteristics[i])) {
+            return true
+        }
+        if (this.matchedCharacteristic.contains(this.characteristics[i])) {
+            return false
+        }
         return (characteristics[i].answer == false)
     }
 
     fun characteristicNotAnswered(i:Int): Boolean {
+        if (this.notMatchedCharacteristic.contains(this.characteristics[i])) {
+            return false
+        }
+        if (this.matchedCharacteristic.contains(this.characteristics[i])) {
+            return false
+        }
         if (characteristics[i].answer == null) {
             if (!this.analyzing) {
                 this.characteristicPointer = i
