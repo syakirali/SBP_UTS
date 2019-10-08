@@ -1,2 +1,2 @@
 # SBP_UTS
-Implementasi forward chaining tentang pemilihan pesawat
+Implementasi backward chaining tentang pemilihan pesawat. Tugas UTS Sistem Berbasis Pengetahuan
